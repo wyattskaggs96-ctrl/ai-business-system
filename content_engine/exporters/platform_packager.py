@@ -84,7 +84,7 @@ NICHE: {post.idea.niche}
 """
 
     # Save to file
-    output_dir = f"output/{platform}"
+    output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'output', platform)
     os.makedirs(output_dir, exist_ok=True)
     filepath = os.path.join(output_dir, filename)
     with open(filepath, 'w') as f:
@@ -126,6 +126,6 @@ def create_daily_queue(packaged_posts):
             queue_content += f"- **Platform:** {post['platform']}\n\n"
 
     # Save queue
-    filepath = "output/daily_post_queue.md"
+    filepath = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'output', 'daily_post_queue.md')
     with open(filepath, 'w') as f:
         f.write(queue_content)

@@ -1,5 +1,5 @@
 import os
-from config import OUTPUT_DIR
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'output')
 
 def export_to_markdown(posts, filename="content_plan.md"):
     """Export posts to markdown file."""
