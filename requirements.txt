@@ -4,3 +4,4 @@ python-dotenv==1.0.0
 flask==3.0.0
 pandas==2.2.0
 schedule==1.2.1
+moviepy==1.0.3

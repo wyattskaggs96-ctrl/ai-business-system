@@ -5,6 +5,8 @@ A modular Python-based system designed for solo entrepreneurs to automate and sc
 ## Features
 
 - **Content Engine**: Generate high-quality content using AI
+- **Video Rendering**: Automatically render TikTok-style videos from content
+- **Approval Dashboard**: Review and approve generated videos
 - **Digital Products**: Create and manage digital products
 - **Automations**: Build and run automated workflows
 - **Websites**: Generate landing pages and websites

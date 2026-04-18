@@ -23,6 +23,8 @@ sys.path.append(os.path.join(project_root, 'content_engine'))
 from content_engine.main import generate_batch
 from content_engine.exporters.export import export_to_markdown, export_to_csv
 from content_engine.exporters.platform_packager import package_for_platforms
+from content_engine.video_renderer import render_videos_for_niche
+from content_engine.approval_state import ApprovalState
 
 logger = get_logger(__name__)
 
@@ -79,12 +81,24 @@ def run_content_workflow(niche, num_posts):
         package_for_platforms(posts)
         print("✅ Packaged for TikTok, Instagram, and YouTube")
 
-        # Step 5: Generate daily post queue (already done in packaging)
-        print("\nStep 5: Daily post queue generated")
+        # Step 5: Render videos
+        print("\nStep 5: Rendering videos...")
+        rendered_videos = render_videos_for_niche(niche)
+        print(f"✅ Rendered {len(rendered_videos)} videos")
+
+        # Step 6: Add videos to approval queue
+        print("\nStep 6: Adding videos to approval queue...")
+        approval_state = ApprovalState()
+        for video_data in rendered_videos:
+            approval_state.add_video(video_data)
+        print(f"✅ Added {len(rendered_videos)} videos to approval queue")
+
+        # Step 7: Generate daily post queue (already done in packaging)
+        print("\nStep 7: Daily post queue generated")
         print("✅ Created daily_post_queue.md")
 
-        # Step 6: Log the run
-        print("\nStep 6: Logging workflow run...")
+        # Step 8: Log the run
+        print("\nStep 8: Logging workflow run...")
         log_workflow_run(niche, num_posts, 'success')
         logger.info(f"Workflow completed successfully for {niche} with {num_posts} posts")
         print("✅ Workflow logged successfully")
@@ -92,6 +106,8 @@ def run_content_workflow(niche, num_posts):
         print("\n" + "=" * 50)
         print("🎉 Content workflow completed successfully!")
         print("📁 Check /content_engine/output/ for all generated files")
+        print("🎬 Videos rendered and ready for approval")
+        print("🌐 Run 'python websites/approval_dashboard.py' to review videos")
         print("=" * 50)
 
     except Exception as e:
