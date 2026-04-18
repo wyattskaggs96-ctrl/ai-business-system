@@ -2,3 +2,4 @@ date,niche,num_posts,status,error
 2026-04-18 19:24:13,motivation,3,error,[Errno 2] No such file or directory: 'output/content_plan.md'
 2026-04-18 19:24:21,motivation,3,success,
 2026-04-18 19:29:33,sports,5,success,
+2026-04-18 19:35:39,sports,2,success,
