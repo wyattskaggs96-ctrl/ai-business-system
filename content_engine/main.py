@@ -29,6 +29,7 @@ from templates.motivational import apply_motivational_template
 from templates.business_lesson import apply_business_lesson_template
 from exporters.export import export_to_markdown, export_to_csv
 from exporters.platform_packager import package_for_platforms
+from digital_products.product_engine import inject_product_promotion, should_promote
 
 def load_ideas(niche: str):
     """Load content ideas for a niche."""
@@ -76,6 +77,10 @@ def generate_post(idea: ContentIdea) -> ContentPost:
         full_post = apply_business_lesson_template(idea, hook, caption, description, cta)
     else:
         full_post = f"{hook}\n\n{caption}\n\n{description}\n\n{cta}"
+
+    # Inject product promotion randomly
+    if should_promote():
+        full_post = inject_product_promotion(full_post)
 
     return ContentPost(
         idea=idea,
