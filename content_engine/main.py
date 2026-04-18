@@ -28,6 +28,7 @@ from templates.controversial import apply_controversial_template
 from templates.motivational import apply_motivational_template
 from templates.business_lesson import apply_business_lesson_template
 from exporters.export import export_to_markdown, export_to_csv
+from exporters.platform_packager import package_for_platforms
 
 def load_ideas(niche: str):
     """Load content ideas for a niche."""
@@ -127,6 +128,11 @@ def main():
     if args.export in ['csv', 'both']:
         export_to_csv(posts)
         print("Exported to content_plan.csv")
+
+    # Package for platforms
+    package_for_platforms(posts)
+    print("Packaged for TikTok, Instagram, and YouTube")
+    print("Created daily_post_queue.md")
 
     # Print sample
     print("\nSample post:")
